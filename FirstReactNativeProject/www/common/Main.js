@@ -10,6 +10,8 @@ import {
     Navigator,
 } from 'react-native'
 import HomePage from '../homePage/HomePage.js'
+import ProfilePage from '../profile/Profilepage.js'
+import NewsPage from '../newspage/Newspage.js'
 import TabNavigator from 'react-native-tab-navigator'
 var initialRouters=[{name:"tab",index:0}];
 
@@ -42,7 +44,7 @@ export default class Main extends Component
                                     renderSelectedIcon={()=><Image source={require('./../images/News_F@2x.png')}/>}
                                     onPress={()=>this.setState({selectedTab:'news'})}
                                 >
-                                    <HomePage navigator={navigator}></HomePage>
+                                    <NewsPage navigator={navigator}></NewsPage>
                                 </TabNavigator.Item>
                                 <TabNavigator.Item
                                     selected={this.state.selectedTab==='home'}
@@ -54,22 +56,13 @@ export default class Main extends Component
                                     <HomePage navigator={navigator}></HomePage>
                                 </TabNavigator.Item>
                                 <TabNavigator.Item
-                                    selected={this.state.selectedTab==='recommend'}
-                                    title="News"
-                                    renderIcon={()=><Image source={require('./../images/Recommended_L@2x.png')}/>}
-                                    renderSelectedIcon={()=><Image source={require('./../images/Recommended_F@2x.png')}/>}
-                                    onPress={()=>this.setState({selectedTab:'recommend'})}
-                                >
-                                    <HomePage navigator={navigator}></HomePage>
-                                </TabNavigator.Item>
-                                <TabNavigator.Item
                                     selected={this.state.selectedTab==='profile'}
                                     title="Profile"
                                     renderIcon={()=><Image source={require('./../images/Account_L@2x.png')}/>}
                                     renderSelectedIcon={()=><Image source={require('./../images/Account_F@2x.png')}/>}
                                     onPress={()=>this.setState({selectedTab:'profile'})}
                                 >
-                                    <HomePage navigator={navigator}></HomePage>
+                                    <ProfilePage navigator={navigator}></ProfilePage>
                                 </TabNavigator.Item>
 
                             </TabNavigator>);

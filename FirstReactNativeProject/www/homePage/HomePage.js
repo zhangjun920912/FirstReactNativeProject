@@ -33,13 +33,11 @@ export default class HomePage extends Component
         }
         return(
             <View style={{height:screenHeight}}>
-                <View style={{height:60,flexDirection:'row',justifyContent:'space-between',paddingLeft:10,paddingRight:10,backgroundColor:'rgba(0,0,0,0.8)',alignItems:'center'}}>
-                    <Image source={require('./../images/Account_F@2x.png')} style={{height:45,width:45}}/>
-                    <Image source={require('./../images/Logo_UK_colors.png')} style={{height:45,width:250}}/>
-                    <Image source={require('./../images/CollectOutline.png')} style={{height:45,width:45}}/>
+                <View style={{height:60,backgroundColor:'rgba(60,60,255,0.6)',justifyContent:'center',alignItems:'center'}}>
+                    <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>项目列表</Text>
                 </View>
                 <View style={{flex:1}}>
-                    <Text>{name}</Text>
+                    <Text>Deal List Page</Text>
                 </View>
             </View>);
     }
