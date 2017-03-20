@@ -8,9 +8,12 @@ import {
     Image,
     Dimensions,
     ListView,
+    TouchableWithoutFeedback
 } from 'react-native'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
+var dealDescription=null;
+var dealList=null;
 
 export default class HomePage extends Component
 {
@@ -18,10 +21,89 @@ export default class HomePage extends Component
     {
         super(props);
         this.state={
-            project:false
+            project:false,
+            dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
         };
     }
 
+    //获取数据
+    componentWillMount() {
+        fetch("http://staging.dealglobe.com/api/v4/deals/search",{method:'GET',headers:{"Accept":"application/json"}})
+        .then((response)=>{return response.json()})
+        .then((responseData)=>{
+            console.log("======================="+JSON.stringify(responseData));
+            dealDescription=responseData.meta;
+            dealList=responseData.deals;
+            this.setState({dataSource:this.state.dataSource.cloneWithRows(dealList)});
+        }).catch((error)=>{
+            if(error)
+            {
+                console.log("============================"+error);
+            }
+        });
+    }
+    //获取项目的财务收入状况
+    getRevenueInfo(dealDetail)
+    {
+        var revenue=null;
+        var ebitda=null;
+        var netprofit=null;
+        if(dealDetail.revenue)
+        {
+            revenue=(<View style={{flexDirection:'row',justifyContent:'flex-start'}}>
+                       <Text>收入:</Text>
+                       <Text style={{color:'#3473BE'}}>{dealDetail.revenue}</Text>
+                     </View>);
+        }
+        if(dealDetail.ebitda)
+        {
+            ebitda=(<View style={{flexDirection:'row',marginLeft:12,justifyContent:'flex-start'}}>
+                <Text>EBITDA:</Text>
+                <Text style={{color:'#3473BE'}}>{dealDetail.ebitda}</Text>
+            </View>);
+        }
+        if(dealDetail.net_profit)
+        {
+            netprofit=(<View style={{flexDirection:'row',marginLeft:12,justifyContent:'flex-start'}}>
+                <Text>净利润:</Text>
+                <Text style={{color:'#3473BE'}}>{dealDetail.net_profit}</Text>
+            </View>);
+        }
+        return(
+            <View style={{flexDirection:'row',flexWrap:'wrap'}}>
+                {revenue}
+                {ebitda}
+                {netprofit}
+            </View>);
+    }
+    //渲染listview的行函数
+    renderEveryRow(deal)
+    {
+        console.log("==========="+JSON.stringify(deal));
+        return(
+            <TouchableWithoutFeedback onPress={()=>{
+                this.props.navigator.push({name:"dealdetail",deal:deal});
+            }}>
+            <View>
+                <View style={{backgroundColor:'#E3E3E3',height:1}}/>
+                <View style={{flexDirection:'row',marginTop:10,marginBottom:10,alignItems:'center'}}>
+                    <Image source={{uri:deal.sector_image_path}} style={{height:screenWeight/8,width:screenWeight/8}}/>
+                    <View style={{marginLeft:20}}>
+                        <View style={{flexDirection:'row'}}>
+                            <Text style={{fontSize:20,color:'#1A1A1A'}}>{deal.country_name}</Text>
+                            <Text style={{marginLeft:12,fontSize:18,color:'#1A1A1A'}}>项目ID:{deal.id}</Text>
+                        </View>
+                        <Text style={{color:'#1A1A1A',fontSize:16}}>{deal.display_name}</Text>
+                        <View style={{marginTop:0}}>
+                        {this.getRevenueInfo(deal)}
+                        </View>
+                    </View>
+                </View>
+            </View>
+            </TouchableWithoutFeedback>)
+    }
+
+    //渲染函数
     render()
     {
         var name=null;
@@ -36,8 +118,13 @@ export default class HomePage extends Component
                 <View style={{height:60,backgroundColor:'rgba(60,60,255,0.6)',justifyContent:'center',alignItems:'center'}}>
                     <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>项目列表</Text>
                 </View>
-                <View style={{flex:1}}>
-                    <Text>Deal List Page</Text>
+                <View style={{flex:1,marginLeft:20,marginRight:20,marginTop:18}}>
+                    <ListView
+                        renderRow={this.renderEveryRow.bind(this)}
+                        dataSource={this.state.dataSource}
+                        showsVerticalScrollIndicator={false}
+                        style={{marginBottom:10}}
+                    />
                 </View>
             </View>);
     }

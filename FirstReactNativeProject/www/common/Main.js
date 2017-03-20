@@ -13,6 +13,9 @@ import HomePage from '../homePage/HomePage.js'
 import ProfilePage from '../profile/Profilepage.js'
 import NewsPage from '../newspage/Newspage.js'
 import TabNavigator from 'react-native-tab-navigator'
+import DealDetail from './../homePage/DealDetail.js'
+import LearnMore from './../profile/LearnMore.js'
+import SetLanguage from './../profile/Setlanguage.js'
 var initialRouters=[{name:"tab",index:0}];
 
 
@@ -30,7 +33,7 @@ export default class Main extends Component
         return(
             <Navigator
                 initialRoute={initialRouters[0]}
-                configureScene={(route,routeStack)=>{Navigator.SceneConfigs.HorizontalSwipeJump}}
+                configureScene={(route,routeStack)=>Navigator.SceneConfigs.HorizontalSwipeJump}
                 initialRouteStack={initialRouters}
                 renderScene={(route,navigator)=>{
                     if(route.name=="tab")
@@ -64,11 +67,18 @@ export default class Main extends Component
                                 >
                                     <ProfilePage navigator={navigator}></ProfilePage>
                                 </TabNavigator.Item>
-
                             </TabNavigator>);
 
                     }
-
+                    if(route.name=="dealdetail") {
+                        return (<DealDetail navigator={navigator} router={route} deal={route.deal}/>);
+                    }
+                    if(route.name=="learnmore") {
+                        return (<LearnMore navigator={navigator} router={route}/>);
+                    }
+                    if(route.name=="setlanguage") {
+                        return (<SetLanguage navigator={navigator} router={route}/>);
+                    }
                 }}
             />
         );
