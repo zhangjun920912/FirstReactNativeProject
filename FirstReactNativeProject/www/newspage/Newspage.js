@@ -25,7 +25,7 @@ export default class Newspage extends Component
     }
     getName()
     {
-        console.log("======news======LanguageHasChanged=============")
+        console.log("======news======LanguageHasChanged============")
     }
     //监听语言发生变化
     componentDidMount() {
