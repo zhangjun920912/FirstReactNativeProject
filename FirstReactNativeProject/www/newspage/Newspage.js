@@ -8,7 +8,8 @@ import {
     Image,
     TouchableOpacity,
     Dimensions,
-    WebView
+    WebView,
+    ActivityIndicator
 } from 'react-native'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
@@ -18,10 +19,26 @@ export default class Newspage extends Component
     constructor(props)
     {
         super(props);
+        this.state={
+            initPage:false,
+        };
     }
 
     render()
     {
+        var animation=null;
+        if(this.state.initPage)
+        {
+           animation=(
+               <View>
+                   <ActivityIndicator
+                       size={"large"}
+                       color={"#00ff00"}
+                   />
+                   <Text style={{marginTop:10,fontSize:18}}>正在加载...</Text>
+               </View>
+           );
+        }
         return(
             <View style={{height:screenHeight}}>
                 <View style={{height:60,backgroundColor:'rgba(255,60,60,0.6)',justifyContent:'center',alignItems:'center'}}>
@@ -29,8 +46,18 @@ export default class Newspage extends Component
                 </View>
                 <View style={{flex:1}}>
                     <WebView
-                       source={{uri:"http://en.dealglobe.com/dealglobe-insight/", headers:{"client-type":"android","Content-Type":"text/html;"}} }
-                    />
+                        source={{uri:"http://en.dealglobe.com/dealglobe-insight/", headers:{"client-type":"android","Content-Type":"text/html;"}} }
+                        onLoadStart={()=>{
+                            this.setState({initPage:true})
+                            console.log("========load start===========");
+                        }}
+                        onLoadEnd={()=>{
+                            console.log("========load end===========");
+                            this.setState({initPage:false});
+                        }}
+                    >
+                        {animation}
+                    </WebView>
                 </View>
             </View>);
     }

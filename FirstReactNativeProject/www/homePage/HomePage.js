@@ -8,7 +8,8 @@ import {
     Image,
     Dimensions,
     ListView,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    ActivityIndicator,
 } from 'react-native'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
@@ -23,6 +24,7 @@ export default class HomePage extends Component
         this.state={
             project:false,
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
+            initProject:true
         };
     }
 
@@ -31,10 +33,9 @@ export default class HomePage extends Component
         fetch("http://staging.dealglobe.com/api/v4/deals/search",{method:'GET',headers:{"Accept":"application/json"}})
         .then((response)=>{return response.json()})
         .then((responseData)=>{
-            console.log("======================="+JSON.stringify(responseData));
             dealDescription=responseData.meta;
             dealList=responseData.deals;
-            this.setState({dataSource:this.state.dataSource.cloneWithRows(dealList)});
+            this.setState({dataSource:this.state.dataSource.cloneWithRows(dealList),initProject:false});
         }).catch((error)=>{
             if(error)
             {
@@ -79,7 +80,6 @@ export default class HomePage extends Component
     //渲染listview的行函数
     renderEveryRow(deal)
     {
-        console.log("==========="+JSON.stringify(deal));
         return(
             <TouchableWithoutFeedback onPress={()=>{
                 this.props.navigator.push({name:"dealdetail",deal:deal});
@@ -106,18 +106,20 @@ export default class HomePage extends Component
     //渲染函数
     render()
     {
-        var name=null;
-        if(this.state.project)
+        var content=null;
+        if(this.state.initProject)
         {
-            name="zhangjun";
+            content=(
+                <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+                    <ActivityIndicator
+                        size={"large"}
+                        color={'#00ff00'}
+                        animating={true}
+                    />
+                    <Text style={{marginTop:10,fontSize:18}}>正在加载...</Text>
+                </View>);
         }else{
-            name="yangjing";
-        }
-        return(
-            <View style={{height:screenHeight}}>
-                <View style={{height:60,backgroundColor:'rgba(60,60,255,0.6)',justifyContent:'center',alignItems:'center'}}>
-                    <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>项目列表</Text>
-                </View>
+            content=(
                 <View style={{flex:1,marginLeft:20,marginRight:20,marginTop:18}}>
                     <ListView
                         renderRow={this.renderEveryRow.bind(this)}
@@ -126,6 +128,14 @@ export default class HomePage extends Component
                         style={{marginBottom:10}}
                     />
                 </View>
+            );
+        }
+        return(
+            <View style={{height:screenHeight}}>
+                <View style={{height:60,backgroundColor:'rgba(60,60,255,0.6)',justifyContent:'center',alignItems:'center'}}>
+                    <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>项目列表</Text>
+                </View>
+                {content}
             </View>);
     }
 }

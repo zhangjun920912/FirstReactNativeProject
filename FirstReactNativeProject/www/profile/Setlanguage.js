@@ -8,7 +8,8 @@ import {
     Image,
     TouchableOpacity,
     Dimensions,
-    WebView
+    WebView,
+    AsyncStorage
 } from 'react-native'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
@@ -24,6 +25,15 @@ export default class Setlanguage extends Component
         };
     }
 
+    componentWillMount() {
+        AsyncStorage.getItem("language",(error,result)=>{
+            if(null!=result)
+            {
+                console.log("=========language==========="+result);
+            }
+        });
+    }
+
     render()
     {
         var selectedChinese=null;
@@ -33,6 +43,7 @@ export default class Setlanguage extends Component
             selectedChinese=(
                 <TouchableOpacity onPress={()=>{
                     this.setState({chinese:true,english:false});
+                    AsyncStorage.setItem("language","Chinese");
                 }}>
                     <View style={{height:60,flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginLeft:20,marginRight:20}}>
                         <Text style={{fontSize:20,color:'#1A1A1A'}}>中文</Text>
@@ -43,6 +54,7 @@ export default class Setlanguage extends Component
             selectedEnglish=(
                 <TouchableOpacity onPress={()=>{
                     this.setState({chinese:false,english:true});
+                    AsyncStorage.setItem("language","English");
                 }}>
                     <View style={{height:60,flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginLeft:20,marginRight:20}}>
                         <Text style={{fontSize:20,color:'#1A1A1A'}}>English</Text>
@@ -53,6 +65,7 @@ export default class Setlanguage extends Component
             selectedChinese=(
                 <TouchableOpacity onPress={()=>{
                     this.setState({chinese:true,english:false});
+                    AsyncStorage.setItem("language","Chinese");
                 }}>
                     <View style={{height:60,flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginLeft:20,marginRight:20}}>
                         <Text style={{fontSize:20,color:'#1A1A1A'}}>中文</Text>
@@ -62,6 +75,7 @@ export default class Setlanguage extends Component
             selectedEnglish=(
                 <TouchableOpacity onPress={()=>{
                     this.setState({chinese:false,english:true});
+                    AsyncStorage.setItem("language","English");
                 }}>
                     <View style={{height:60,flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginLeft:20,marginRight:20}}>
                         <Text style={{fontSize:20,color:'#1A1A1A'}}>English</Text>
