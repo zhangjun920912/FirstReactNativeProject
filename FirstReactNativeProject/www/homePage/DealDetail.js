@@ -23,9 +23,17 @@ export default class DealDetail extends Component
             deal:this.props.deal
         };
     }
+    getName()
+    {
+        console.log("=====dealdetail=======LanguageHasChanged=============")
+    }
 
     componentWillMount() {
         console.log("===========componentWillMount================"+JSON.stringify(this.props.deal));
+    }
+
+    componentDidMount() {
+        window.EventBus.on('LanguageHasChanged',()=>{this.getName()});
     }
     render()
     {

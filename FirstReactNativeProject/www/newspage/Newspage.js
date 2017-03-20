@@ -23,6 +23,14 @@ export default class Newspage extends Component
             initPage:false,
         };
     }
+    getName()
+    {
+        console.log("======news======LanguageHasChanged============")
+    }
+    //监听语言发生变化
+    componentDidMount() {
+        window.EventBus.on('LanguageHasChanged',()=>{this.getName()});
+    }
 
     render()
     {

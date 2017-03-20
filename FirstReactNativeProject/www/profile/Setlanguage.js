@@ -43,6 +43,7 @@ export default class Setlanguage extends Component
             selectedChinese=(
                 <TouchableOpacity onPress={()=>{
                     this.setState({chinese:true,english:false});
+                    window.EventBus.trigger('LanguageHasChanged',"please click here");
                     AsyncStorage.setItem("language","Chinese");
                 }}>
                     <View style={{height:60,flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginLeft:20,marginRight:20}}>
@@ -54,6 +55,7 @@ export default class Setlanguage extends Component
             selectedEnglish=(
                 <TouchableOpacity onPress={()=>{
                     this.setState({chinese:false,english:true});
+                    window.EventBus.trigger('LanguageHasChanged',"please click here");
                     AsyncStorage.setItem("language","English");
                 }}>
                     <View style={{height:60,flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginLeft:20,marginRight:20}}>
@@ -65,6 +67,7 @@ export default class Setlanguage extends Component
             selectedChinese=(
                 <TouchableOpacity onPress={()=>{
                     this.setState({chinese:true,english:false});
+                    window.EventBus.trigger('LanguageHasChanged',"please click here");
                     AsyncStorage.setItem("language","Chinese");
                 }}>
                     <View style={{height:60,flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginLeft:20,marginRight:20}}>
@@ -75,6 +78,7 @@ export default class Setlanguage extends Component
             selectedEnglish=(
                 <TouchableOpacity onPress={()=>{
                     this.setState({chinese:false,english:true});
+                    window.EventBus.trigger('LanguageHasChanged',"please click here");
                     AsyncStorage.setItem("language","English");
                 }}>
                     <View style={{height:60,flexDirection:'row',alignItems:'center',justifyContent:'space-between',marginLeft:20,marginRight:20}}>
