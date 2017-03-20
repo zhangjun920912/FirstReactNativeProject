@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import {
   AppRegistry,
 } from 'react-native';
-import HomePage from './www/HomePage/homepage.js'
+import Main from './www/common/Main.js'
 
 
-AppRegistry.registerComponent('FirstReactNativeProject', () => HomePage);
+AppRegistry.registerComponent('FirstReactNativeProject', () => Main);
