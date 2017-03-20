@@ -16,6 +16,10 @@ import TabNavigator from 'react-native-tab-navigator'
 import DealDetail from './../homePage/DealDetail.js'
 import LearnMore from './../profile/LearnMore.js'
 import SetLanguage from './../profile/Setlanguage.js'
+//导入事件变量
+var BackboneEvents=require('backbone-events-standalone');
+//创建全局的时间变量
+window.EventBus=BackboneEvents.mixin({});
 var initialRouters=[{name:"tab",index:0}];
 
 

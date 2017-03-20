@@ -43,6 +43,14 @@ export default class HomePage extends Component
             }
         });
     }
+    getName()
+    {
+        console.log("======home======LanguageHasChanged=============")
+    }
+    //监听语言发生变化
+    componentDidMount() {
+        window.EventBus.on('LanguageHasChanged',()=>{this.getName()});
+    }
     //获取项目的财务收入状况
     getRevenueInfo(dealDetail)
     {
