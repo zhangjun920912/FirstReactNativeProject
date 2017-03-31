@@ -121,7 +121,7 @@ export default class HomePage extends Component
                 <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                     <ActivityIndicator
                         size={"large"}
-                        color={'#00ff00'}
+                        color={'rgba(60,60,255,0.6)'}
                         animating={true}
                     />
                     <Text style={{marginTop:10,fontSize:18}}>正在加载...</Text>

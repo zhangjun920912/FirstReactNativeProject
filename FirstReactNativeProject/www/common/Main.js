@@ -15,7 +15,11 @@ import NewsPage from '../newspage/Newspage.js'
 import TabNavigator from 'react-native-tab-navigator'
 import DealDetail from './../homePage/DealDetail.js'
 import LearnMore from './../profile/LearnMore.js'
+import HobbySetting from './../profile/hobbysetting/HobbySetting.js'
 import SetLanguage from './../profile/Setlanguage.js'
+import Recommend from './../recommend/Recommend.js'
+import Flower from './../flower/Flower.js'
+
 //导入事件变量
 var BackboneEvents=require('backbone-events-standalone');
 //创建全局的时间变量
@@ -29,7 +33,7 @@ export default class Main extends Component
     {
         super(props);
         this.state={
-            selectedTab:"home"
+            selectedTab:"flower"
         }
     }
     render()
@@ -63,6 +67,24 @@ export default class Main extends Component
                                     <HomePage navigator={navigator}></HomePage>
                                 </TabNavigator.Item>
                                 <TabNavigator.Item
+                                    selected={this.state.selectedTab==='flower'}
+                                    title="Flower"
+                                    renderIcon={()=><Image source={require('./../images/Flower_L.png')}/>}
+                                    renderSelectedIcon={()=><Image source={require('./../images/Flower_F.png')}/>}
+                                    onPress={()=>this.setState({selectedTab:'flower'})}
+                                >
+                                    <Flower navigator={navigator}></Flower>
+                                </TabNavigator.Item>
+                                <TabNavigator.Item
+                                    selected={this.state.selectedTab==='recommend'}
+                                    title="Recommand"
+                                    renderIcon={()=><Image source={require('./../images/Recommended_L@2x.png')}/>}
+                                    renderSelectedIcon={()=><Image source={require('./../images/Recommended_F@2x.png')}/>}
+                                    onPress={()=>this.setState({selectedTab:'recommend'})}
+                                >
+                                    <Recommend navigator={navigator}></Recommend>
+                                </TabNavigator.Item>
+                                <TabNavigator.Item
                                     selected={this.state.selectedTab==='profile'}
                                     title="Profile"
                                     renderIcon={()=><Image source={require('./../images/Account_L@2x.png')}/>}
@@ -82,6 +104,9 @@ export default class Main extends Component
                     }
                     if(route.name=="setlanguage") {
                         return (<SetLanguage navigator={navigator} router={route}/>);
+                    }
+                    if(route.name=="hobbysetting") {
+                        return (<HobbySetting navigator={navigator} router={route}/>);
                     }
                 }}
             />
