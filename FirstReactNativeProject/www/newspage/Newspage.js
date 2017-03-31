@@ -20,7 +20,7 @@ export default class Newspage extends Component
     {
         super(props);
         this.state={
-            initPage:false,
+            initPage:true,
         };
     }
     getName()
@@ -49,20 +49,13 @@ export default class Newspage extends Component
         }
         return(
             <View style={{height:screenHeight}}>
-                <View style={{height:60,backgroundColor:'rgba(255,60,60,0.6)',justifyContent:'center',alignItems:'center'}}>
+                <View style={{height:60,backgroundColor:'rgba(0,199,255,0.8)',justifyContent:'center',alignItems:'center'}}>
                     <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>新闻咨询</Text>
                 </View>
                 <View style={{flex:1}}>
                     <WebView
                         source={{uri:"http://en.dealglobe.com/dealglobe-insight/", headers:{"client-type":"android","Content-Type":"text/html;"}} }
-                        onLoadStart={()=>{
-                            this.setState({initPage:true})
-                            console.log("========load start===========");
-                        }}
-                        onLoadEnd={()=>{
-                            console.log("========load end===========");
-                            this.setState({initPage:false});
-                        }}
+                        startInLoadingState={true}
                     >
                         {animation}
                     </WebView>

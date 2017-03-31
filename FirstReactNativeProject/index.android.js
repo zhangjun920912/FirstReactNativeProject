@@ -9,6 +9,7 @@ import {
   AppRegistry,
 } from 'react-native';
 import Main from './www/common/Main.js'
+import HobbySetting from './www/profile/hobbysetting/HobbySetting.js'
 
 
 AppRegistry.registerComponent('FirstReactNativeProject', () => Main);
