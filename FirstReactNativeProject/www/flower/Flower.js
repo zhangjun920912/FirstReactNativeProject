@@ -24,7 +24,7 @@ export default class Flower extends Component
     {
         return(
             <View style={{height:screenHeight}}>
-                <View style={{height:60,backgroundColor:'rgba(220,20,60,0.8)',alignItems:'center',flexDirection:'row'}}>
+                <View style={{height:60,backgroundColor:'rgba(220,20,60,0.6)',alignItems:'center',flexDirection:'row'}}>
                     <View style={{flex:1}}>
                         <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>项目排序</Text>
                     </View>

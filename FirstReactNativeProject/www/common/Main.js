@@ -33,7 +33,7 @@ export default class Main extends Component
     {
         super(props);
         this.state={
-            selectedTab:"flower"
+            selectedTab:"home"
         }
     }
     render()
