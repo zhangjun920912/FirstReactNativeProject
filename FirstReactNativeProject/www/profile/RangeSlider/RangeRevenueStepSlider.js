@@ -22,7 +22,7 @@ export default class RangeStepSlider extends Component
     {
         super(props);
         this.state={
-            rangeMin:2,
+            rangeMin:0,
             rangeMax:8,
             allRangePoint:null,
         };
@@ -31,6 +31,11 @@ export default class RangeStepSlider extends Component
     componentWillMount() {
         rangeValue=this.props.rangeValue;
         this.setState({...this.state,allRangePoint:this.getRangeValue()});
+    }
+    //重置所有的数据
+    resetRange()
+    {
+        this.setState({...this.state,rangeMin:0,rangeMax:8});
     }
 
     //根据范围值的数量获取滑动点
@@ -62,6 +67,16 @@ export default class RangeStepSlider extends Component
         var value={min:rangeValue[this.state.rangeMin],max:rangeValue[this.state.rangeMax]};
         this.props.setValue(value);
 
+    }
+
+    componentDidMount() {
+        this.setState({...this.state,rangeMin:this.props.min,rangeMax:this.props.max},()=>{
+            this.resetAllRangePoint();
+        });
+        window.EventBus.on("resetrevenuerange",()=>{
+            this.resetRange();
+            setTimeout(()=>{this.resetAllRangePoint(),1})
+        });
     }
     render()
     {
