@@ -10,6 +10,7 @@ import {
     Dimensions,
     WebView,
     Slider,
+    ScrollView
 } from 'react-native'
 import RangeRevenueStepSlider from '../RangeSlider/RangeRevenueStepSlider.js'
 import RangeEbitdaStepSlider from '../RangeSlider/RangeEbitdaStepSlider.js'
@@ -18,6 +19,8 @@ var screenWeight=Dimensions.get('window').width;
 var revenueValue=["0","10","25","50","75","100","150","250","+∞"];
 var ebitdaValue=["-∞","1","5","20","50","75","100","+∞"];
 var netProfitValue=["-∞","1","5","20","50","75","100","+∞"];
+var rangeRevenueSetpSlider=new RangeRevenueStepSlider();
+var rangeEbitdaStepSlider=new RangeEbitdaStepSlider();
 
 export default class HobbySetting extends Component
 {
@@ -106,7 +109,7 @@ export default class HobbySetting extends Component
     render()
     {
         return(
-            <View style={{height:screenHeight}}>
+            <View style={{flex:1}}>
                 <View style={{height:60,backgroundColor:'rgba(60,255,60,0.6)',alignItems:'center',flexDirection:'row',paddingRight:screenWeight/12}}>
                     <TouchableOpacity onPress={()=>{this.props.navigator.pop()}}>
                         <View style={{flexDirection:'row'}}>
@@ -118,18 +121,19 @@ export default class HobbySetting extends Component
                         <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>个人❤️爱好</Text>
                     </View>
                 </View>
+                <ScrollView style={{paddingBottom:10}}>
                 <View style={{marginTop:20}}>
                     <View style={{alignItems:'center'}}>
                         <Text style={{marginBottom:12,fontSize:16}}>Revenue $(M)</Text>
-                        <RangeRevenueStepSlider setValue={(value)=>{this.resetRevenue(value)}} rangeValue={revenueValue}/>
+                        <RangeRevenueStepSlider setValue={(value)=>{this.resetRevenue(value)}} rangeValue={revenueValue} min={2} max={8}/>
                     </View>
                     <View style={{alignItems:'center',marginTop:20}}>
                         <Text style={{marginBottom:12,fontSize:16}}>EBITDA $(M)</Text>
-                        <RangeEbitdaStepSlider setValue={(value)=>{this.resetEbitda(value)}} rangeValue={ebitdaValue}/>
+                        <RangeEbitdaStepSlider setValue={(value)=>{this.resetEbitda(value)}} rangeValue={ebitdaValue} min={2} max={7}/>
                     </View>
                     <View style={{alignItems:'center',marginTop:20}}>
                         <Text style={{marginBottom:12,fontSize:16}}>Net Profit $(M)</Text>
-                        <RangeEbitdaStepSlider setValue={(value)=>{this.resetNetProfit(value)}} rangeValue={netProfitValue}/>
+                        <RangeEbitdaStepSlider setValue={(value)=>{this.resetNetProfit(value)}} rangeValue={netProfitValue} min={2} max={7}/>
                     </View>
                 </View>
                 <View style={{marginTop:12,marginLeft:20,marginRight:20}}>
@@ -162,11 +166,14 @@ export default class HobbySetting extends Component
                 </View>
                 <TouchableOpacity onPress={()=>{
                     this.setState({...this.state,revenueMin:0, revenueMax:+999999999, ebitdaMin:-999999999, ebitdaMax:+999999999, netProfitMin:-999999999, netProfitMax:+999999999});
+                    window.EventBus.trigger("resetrevenuerange","reset revenue range");
                 }}>
                 <View style={{alignItems:'center',justifyContent:'center',backgroundColor:'#00ff00',marginLeft:20,marginRight:20,marginTop:20,height:40}}>
                     <Text style={{color:'#ffffff'}}>重置</Text>
                 </View>
                 </TouchableOpacity>
+                    <View style={{height:10}}/>
+                </ScrollView>
             </View>);
     }
 }

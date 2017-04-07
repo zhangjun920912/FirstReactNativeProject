@@ -22,7 +22,7 @@ export default class RangeStepSlider extends Component
     {
         super(props);
         this.state={
-            rangeMin:0,
+            rangeMin:2,
             rangeMax:7,
             allRangePoint:null,
         };
@@ -62,6 +62,20 @@ export default class RangeStepSlider extends Component
         var value={min:rangeValue[this.state.rangeMin],max:rangeValue[this.state.rangeMax]};
         this.props.setValue(value);
 
+    }
+
+    resetRange()
+    {
+        this.setState({...this.state,rangeMin:0,rangeMax:7});
+    }
+    componentDidMount() {
+        this.setState({...this.state,rangeMin:this.props.min,rangeMax:this.props.max},()=>{
+            this.resetAllRangePoint();
+        });
+        window.EventBus.on("resetrevenuerange",()=>{
+            this.resetRange();
+            setTimeout(()=>{this.resetAllRangePoint()})
+        });
     }
     render()
     {
