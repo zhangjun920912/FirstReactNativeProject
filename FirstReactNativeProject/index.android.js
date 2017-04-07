@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import Main from './www/common/Main.js'
 import HobbySetting from './www/profile/hobbysetting/HobbySetting.js'
+import RangeStepSlider from './www/profile/RangeSlider/RangeRevenueStepSlider.js'
 
 
-AppRegistry.registerComponent('FirstReactNativeProject', () => HobbySetting);
+AppRegistry.registerComponent('FirstReactNativeProject', () => Main);
