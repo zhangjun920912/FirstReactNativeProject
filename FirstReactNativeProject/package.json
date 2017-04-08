@@ -10,6 +10,7 @@
     "backbone-events-standalone": "^0.2.7",
     "react": "15.4.2",
     "react-native": "0.42.0",
+    "react-native-country-picker-modal": "^0.2.7",
     "react-native-device-info": "^0.10.2",
     "react-native-material-kit": "^0.4.1",
     "react-native-tab-navigator": "^0.3.3"

@@ -21,7 +21,18 @@ export default class I18n extends Component
         }else{
             this.isEnglish=true;
         }
-
+        AsyncStorage.getItem("language",(error,result)=>{
+            if(result)
+            {
+                console.log("=================="+result);
+                if("en"==result)
+                {
+                    this.isEnglish=true;
+                }else{
+                    this.isEnglish=false;
+                }
+            }
+        });
     }
 
     //切换为英文
@@ -32,8 +43,9 @@ export default class I18n extends Component
             return;
         }
         this.isEnglish=true;
-        AsyncStorage.setItem("language","en");
-        return "en";
+        let ret=AsyncStorage.setItem("language","en");
+        console.log("======english========="+JSON.stringify(ret));
+        return ret;
     }
     //切换为中文
     async changeToChinese()
@@ -43,8 +55,9 @@ export default class I18n extends Component
             return;
         }
         this.isEnglish=false;
-        AsyncStorage.setItem("language","cn");
-        return "cn";
+        let ret=AsyncStorage.setItem("language","cn");
+        console.log("=======chinese========"+JSON.stringify(ret));
+        return ret;
     }
     //切换底部tab标签title的语言
     translate(key)
@@ -79,7 +92,11 @@ var dictory={
         "Personal setting":"Personal setting",
         "Learning More":"Learning More",
         "Language setting":"Language setting",
-        "Personal hobby setting":"Personal hobby setting"
+        "Personal hobby setting":"Personal hobby setting",
+        "Back":"Back",
+        "Personal Hobby":"Personal Hobby",
+        "Login":"Login"
+
     },
     "cn":{
         "News":"新闻咨询",
@@ -90,6 +107,9 @@ var dictory={
         "Personal setting":"个人设置",
         "Learning More":"了解更多",
         "Language setting":"语言设置",
-        "Personal hobby setting":"个人❤爱好❤设置"
+        "Personal hobby setting":"个人❤爱好❤设置",
+        "Back":"返回",
+        "Personal Hobby":"个人❤爱好",
+        "Login":"登录"
     }
 };

@@ -20,6 +20,7 @@ import SetLanguage from './../profile/Setlanguage.js'
 import Recommend from './../recommend/Recommend.js'
 import Flower from './../flower/Flower.js'
 import I18n from './../common/I18n.js'
+import Login from './../profile/login/Login.js'
 
 //导入事件变量
 var BackboneEvents=require('backbone-events-standalone');
@@ -109,6 +110,10 @@ export default class Main extends Component
                     }
                     if(route.name=="hobbysetting") {
                         return (<HobbySetting navigator={navigator} router={route}/>);
+                    }
+                    if(route.name=="login")
+                    {
+                        return(<Login navigator={navigator} router={route}></Login>);
                     }
                 }}
             />

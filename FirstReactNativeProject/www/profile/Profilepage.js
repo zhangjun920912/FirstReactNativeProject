@@ -28,9 +28,13 @@ export default class Profilepage extends BaseComponent
                     <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>{this.i18n["Personal setting"]}</Text>
                 </View>
                 <View style={{flex:1}}>
+                    <TouchableOpacity onPress={()=>{
+                        this.props.navigator.push({name:'login'});
+                    }}>
                     <View style={{marginTop:screenHeight/30,alignItems:'center'}}>
-                      <Image source={require('./../images/imagexx.jpeg')}  style={{height:screenWeight/5,width:screenWeight/5,borderRadius:76,borderWidth:2,borderColor:'#ffff00'}}/>
+                      <Image source={require('./../images/myaccountnotLoggin.png')}  style={{height:screenWeight/5,width:screenWeight/5,borderRadius:76,borderWidth:2,borderColor:'#ffff00'}}/>
                     </View>
+                    </TouchableOpacity>
                     <View style={{height:1,backgroundColor:'#E3E3E3', marginTop:screenHeight/30,marginLeft:20}}/>
                     <TouchableOpacity onPress={()=>{
                         this.props.navigator.push({name:'learnmore'});
