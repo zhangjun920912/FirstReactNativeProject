@@ -19,11 +19,13 @@ import HobbySetting from './../profile/hobbysetting/HobbySetting.js'
 import SetLanguage from './../profile/Setlanguage.js'
 import Recommend from './../recommend/Recommend.js'
 import Flower from './../flower/Flower.js'
+import I18n from './../common/I18n.js'
 
 //导入事件变量
 var BackboneEvents=require('backbone-events-standalone');
 //创建全局的时间变量
 window.EventBus=BackboneEvents.mixin({});
+window.i18n=new I18n();
 var initialRouters=[{name:"tab",index:0}];
 
 
@@ -50,7 +52,7 @@ export default class Main extends Component
                             <TabNavigator>
                                 <TabNavigator.Item
                                     selected={this.state.selectedTab==='news'}
-                                    title="News"
+                                    title={window.i18n.translate("News")}
                                     renderIcon={()=><Image source={require('./../images/News_L@2x.png')}/>}
                                     renderSelectedIcon={()=><Image source={require('./../images/News_F@2x.png')}/>}
                                     onPress={()=>this.setState({selectedTab:'news'})}
@@ -59,7 +61,7 @@ export default class Main extends Component
                                 </TabNavigator.Item>
                                 <TabNavigator.Item
                                     selected={this.state.selectedTab==='home'}
-                                    title="Homes"
+                                    title={window.i18n.translate("Homes")}
                                     renderIcon={()=><Image source={require('./../images/Deals_L@2x.png')}/>}
                                     renderSelectedIcon={()=><Image source={require('./../images/Deals_F@2x.png')}/>}
                                     onPress={()=>this.setState({selectedTab:'home'})}
@@ -68,7 +70,7 @@ export default class Main extends Component
                                 </TabNavigator.Item>
                                 <TabNavigator.Item
                                     selected={this.state.selectedTab==='flower'}
-                                    title="Flower"
+                                    title={window.i18n.translate("Flowers")}
                                     renderIcon={()=><Image source={require('./../images/Flower_L.png')}/>}
                                     renderSelectedIcon={()=><Image source={require('./../images/Flower_F.png')}/>}
                                     onPress={()=>this.setState({selectedTab:'flower'})}
@@ -77,7 +79,7 @@ export default class Main extends Component
                                 </TabNavigator.Item>
                                 <TabNavigator.Item
                                     selected={this.state.selectedTab==='recommend'}
-                                    title="Recommand"
+                                    title={window.i18n.translate("Recommend")}
                                     renderIcon={()=><Image source={require('./../images/Recommended_L@2x.png')}/>}
                                     renderSelectedIcon={()=><Image source={require('./../images/Recommended_F@2x.png')}/>}
                                     onPress={()=>this.setState({selectedTab:'recommend'})}
@@ -86,7 +88,7 @@ export default class Main extends Component
                                 </TabNavigator.Item>
                                 <TabNavigator.Item
                                     selected={this.state.selectedTab==='profile'}
-                                    title="Profile"
+                                    title={window.i18n.translate("Profits")}
                                     renderIcon={()=><Image source={require('./../images/Account_L@2x.png')}/>}
                                     renderSelectedIcon={()=><Image source={require('./../images/Account_F@2x.png')}/>}
                                     onPress={()=>this.setState({selectedTab:'profile'})}

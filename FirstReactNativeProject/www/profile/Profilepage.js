@@ -9,10 +9,11 @@ import {
     TouchableOpacity,
     Dimensions,
 } from 'react-native'
+import BaseComponent from './../common/BaseComponent.js'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
 
-export default class Profilepage extends Component
+export default class Profilepage extends BaseComponent
 {
     constructor(props)
     {
@@ -24,7 +25,7 @@ export default class Profilepage extends Component
         return(
             <View style={{height:screenHeight}}>
                 <View style={{height:60,backgroundColor:'rgba(60,255,60,0.6)',justifyContent:'center',alignItems:'center'}}>
-                    <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>个人设置</Text>
+                    <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>{this.i18n["Personal setting"]}</Text>
                 </View>
                 <View style={{flex:1}}>
                     <View style={{marginTop:screenHeight/30,alignItems:'center'}}>
@@ -35,21 +36,21 @@ export default class Profilepage extends Component
                         this.props.navigator.push({name:'learnmore'});
                     }}>
                     <View style={{height:60,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{color:'#1A1A1A',paddingLeft:20,fontSize:20,marginRight:40}}>了解更多</Text>
+                        <Text style={{color:'#1A1A1A',paddingLeft:20,fontSize:20,marginRight:40}}>{this.i18n["Learning More"]}</Text>
                         <Image source={require('./../images/Next-item_@3x.png')} style={{height:40,width:40}}/>
                     </View>
                     </TouchableOpacity>
                     <View style={{height:1,backgroundColor:'#E3E3E3',marginLeft:20}}/>
                     <TouchableOpacity onPress={()=>{this.props.navigator.push({name:'setlanguage'})}}>
                     <View style={{height:60,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                        <Text style={{color:'#1A1A1A', paddingLeft:20,fontSize:20,marginRight:40}}>语言设置</Text>
+                        <Text style={{color:'#1A1A1A', paddingLeft:20,fontSize:20,marginRight:40}}>{this.i18n["Language setting"]}</Text>
                         <Image source={require('./../images/Next-item_@3x.png')} style={{height:40,width:40}}/>
                     </View>
                     </TouchableOpacity>
                     <View style={{height:1,backgroundColor:'#E3E3E3',marginLeft:20}}/>
                     <TouchableOpacity onPress={()=>{this.props.navigator.push({name:'hobbysetting'})}}>
                         <View style={{height:60,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
-                            <Text style={{color:'#1A1A1A', paddingLeft:20,fontSize:20,marginRight:40}}>个人❤️爱好❤️设置</Text>
+                            <Text style={{color:'#1A1A1A', paddingLeft:20,fontSize:20,marginRight:40}}>{this.i18n["Personal hobby setting"]}</Text>
                             <Image source={require('./../images/Next-item_@3x.png')} style={{height:40,width:40}}/>
                         </View>
                     </TouchableOpacity>
