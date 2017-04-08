@@ -11,6 +11,8 @@ import {
 import Main from './www/common/Main.js'
 import HobbySetting from './www/profile/hobbysetting/HobbySetting.js'
 import RangeStepSlider from './www/profile/RangeSlider/RangeRevenueStepSlider.js'
+import Setlanguage from './www/profile/Setlanguage.js'
+import Login from './www/profile/login/Login.js'
 
 
 AppRegistry.registerComponent('FirstReactNativeProject', () => Main);
