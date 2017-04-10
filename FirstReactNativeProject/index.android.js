@@ -15,4 +15,4 @@ import Setlanguage from './www/profile/Setlanguage.js'
 import Login from './www/profile/login/Login.js'
 
 
-AppRegistry.registerComponent('FirstReactNativeProject', () => Main);
+AppRegistry.registerComponent('FirstReactNativeProject', () => Login);

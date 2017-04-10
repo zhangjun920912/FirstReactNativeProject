@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import BaseComponent from './../../common/BaseComponent.js'
 import CountryPicker from 'react-native-country-picker-modal'
+var ImagePicker = require('react-native-image-picker');
 
 
 
@@ -22,11 +23,25 @@ export default class Login extends BaseComponent {
         super(props);
         this.state={
             cca2:"CN",
-            prefix:"86"
+            prefix:"86",
+            canSubmit:false,
+            options:{
+                title:"选择照片",
+                cancelButtonTitle:"取消",
+                takePhotoButtonTitle:"拍照",
+                chooseFromLibraryButtonTitle:"从相册选择",
+            }
         };
     }
 
     render() {
+        var image=null;
+        if(this.state.canSubmit)
+        {
+            image=(<Image source={this.state.avatarSource}  style={{height:140,width:140,marginLeft:20,borderRadius:70}}/>);
+        }else{
+            image=(<Image source={require('./../../images/PHOTO@3x.png')} style={{height:140,width:140,marginLeft:20}}/>);
+        }
         return (
             <View style={{flex: 1}}>
                 <View style={{
@@ -65,8 +80,36 @@ export default class Login extends BaseComponent {
                             />
                             </View>
                         </View>
-                        <View style={{flexDirection:'row',marginTop:20}}>
+                        <View style={{flexDirection:'row',marginTop:20, alignItems:'center'}}>
                             <Text style={{color:'#ffffff'}}>头像选择:</Text>
+                            <TouchableOpacity onPress={()=>{
+                                ImagePicker.showImagePicker(this.state.options, (response) => {
+                                    console.log('Response = ', response);
+
+                                    if (response.didCancel) {
+                                        console.log('User cancelled image picker');
+                                    }
+                                    else if (response.error) {
+                                        console.log('ImagePicker Error: ', response.error);
+                                    }
+                                    else if (response.customButton) {
+                                        console.log('User tapped custom button: ', response.customButton);
+                                    }
+                                    else {
+                                        let source = { uri: response.uri };
+
+                                        // You can also display the image using data:
+                                        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+                                        this.setState({
+                                            avatarSource: source,
+                                            canSubmit:true
+                                        });
+                                    }
+                                });
+                            }}>
+                                {image}
+                            </TouchableOpacity>
                         </View>
                     </Image>
 
