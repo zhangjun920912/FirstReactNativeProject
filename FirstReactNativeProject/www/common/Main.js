@@ -44,7 +44,7 @@ export default class Main extends Component
         return(
             <Navigator
                 initialRoute={initialRouters[0]}
-                configureScene={(route,routeStack)=>Navigator.SceneConfigs.HorizontalSwipeJump}
+                configureScene={(route,routeStack)=>({...Navigator.SceneConfigs.HorizontalSwipeJump,gestures:{pop:false}})}
                 initialRouteStack={initialRouters}
                 renderScene={(route,navigator)=>{
                     if(route.name=="tab")
