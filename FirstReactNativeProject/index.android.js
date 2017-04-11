@@ -13,6 +13,7 @@ import HobbySetting from './www/profile/hobbysetting/HobbySetting.js'
 import RangeStepSlider from './www/profile/RangeSlider/RangeRevenueStepSlider.js'
 import Setlanguage from './www/profile/Setlanguage.js'
 import Login from './www/profile/login/Login.js'
+import DealDetail from './www/homePage/DealDetail.js'
 
 
-AppRegistry.registerComponent('FirstReactNativeProject', () => Login);
+AppRegistry.registerComponent('FirstReactNativeProject', () => Main);
