@@ -3,6 +3,7 @@ package com.firstreactnativeproject;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.yolinsoft.umengshare.UmengSharePackage;
 import com.imagepicker.ImagePickerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new UmengSharePackage(),
             new RNDeviceInfo(),
             new ReactMaterialKitPackage(),
               new ImagePickerPackage()
