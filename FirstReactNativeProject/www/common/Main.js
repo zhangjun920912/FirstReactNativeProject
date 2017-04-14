@@ -8,6 +8,7 @@ import {
     Image,
     TouchableOpacity,
     Navigator,
+    Alert
 } from 'react-native'
 import HomePage from '../homePage/HomePage.js'
 import ProfilePage from '../profile/Profilepage.js'
@@ -21,6 +22,9 @@ import Recommend from './../recommend/Recommend.js'
 import Flower from './../flower/Flower.js'
 import I18n from './../common/I18n.js'
 import Login from './../profile/login/Login.js'
+import NewsDetail from './../common/NewsDetail.js'
+
+import JPushModule from 'jpush-react-native'
 
 //导入事件变量
 var BackboneEvents=require('backbone-events-standalone');
@@ -35,14 +39,48 @@ export default class Main extends Component
     constructor(props)
     {
         super(props);
+        this.navigator=null;
         this.state={
             selectedTab:"home"
         }
+        JPushModule.initPush();
+        JPushModule.getInfo((device)=>{
+            console.log("We get device info:"+JSON.stringify(device));
+        })
+        JPushModule.getRegistrationID((res)=>{
+            console.log("We get register id:"+res);
+        })
+    }
+
+    componentWillMount() {
+    }
+
+
+    componentDidMount() {
+        if(null!=this.navigator)
+        {
+            console.log("============this.navigator================");
+        }
+        //点击打开notifycation时候的监听
+        JPushModule.addReceiveOpenNotificationListener((message)=>{
+            var newMessage=JSON.parse(message.extras);
+            Alert.alert("您有新的消息,是否查看:",newMessage.title,[{text:"确定",onPress:()=>{
+                this.navigator.push({name:"NewsDetail",path:newMessage.content});
+            }},{text:"取消",onPress:()=>{}}]);
+        })
+        //接收到推送的时候的监听
+        JPushModule.addReceiveNotificationListener((msg)=>{
+            var newMessage=JSON.parse(msg.extras);
+            Alert.alert("您有新的消息,是否查看:",newMessage.title,[{text:"确定",onPress:()=>{
+                this.navigator.push({name:"NewsDetail",path:newMessage.content});
+            }},{text:"取消",onPress:()=>{}}]);
+        })
     }
     render()
     {
         return(
             <Navigator
+                ref={ref=>{this.navigator=ref}}
                 initialRoute={initialRouters[0]}
                 configureScene={(route,routeStack)=>({...Navigator.SceneConfigs.HorizontalSwipeJump,gestures:{pop:false}})}
                 initialRouteStack={initialRouters}
@@ -113,7 +151,11 @@ export default class Main extends Component
                     }
                     if(route.name=="login")
                     {
-                        return(<Login navigator={navigator} router={route}></Login>);
+                        return(<Login navigator={navigator} router={route}/>);
+                    }
+                    if(route.name=="NewsDetail")
+                    {
+                        return(<NewsDetail navigator={navigator} router={route} fullPath={route.path}/>);
                     }
                 }}
             />
