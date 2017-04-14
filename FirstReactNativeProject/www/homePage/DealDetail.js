@@ -57,6 +57,7 @@ export default class DealDetail extends Component
                       <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>项目详情</Text>
                     </View>
                     <TouchableOpacity onPress={()=>{
+                        window.UMNative.onEvent("UmengShare");
                         UmengShare.openShare(this.state.deal.display_name,this.state.deal.public_description,"http://www.imust.cn",{uri:"http://staging.dealglobe.com"+"/sellsides/"+this.state.deal.id});
                     }}>
                         <Image source={require('./../images/Shares.png')} style={{height:35,width:35}}/>

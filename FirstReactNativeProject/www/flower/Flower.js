@@ -20,6 +20,10 @@ export default class Flower extends Component
         super(props);
     }
 
+    componentWillMount() {
+        window.UMNative.onEvent("OpenFlowerPage");
+    }
+
     render()
     {
         return(

@@ -34,6 +34,10 @@ export default class Login extends BaseComponent {
         };
     }
 
+    componentWillMount() {
+        window.UMNative.onEvent("LoginPage");
+    }
+
     render() {
         var image=null;
         if(this.state.canSubmit)

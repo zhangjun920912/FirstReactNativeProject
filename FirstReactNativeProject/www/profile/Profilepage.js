@@ -20,6 +20,10 @@ export default class Profilepage extends BaseComponent
         super(props);
     }
 
+    componentWillMount() {
+        window.UMNative.onEvent("OpenProfilepage");
+    }
+
     render()
     {
         return(

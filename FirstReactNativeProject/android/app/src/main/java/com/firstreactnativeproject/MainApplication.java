@@ -15,6 +15,7 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+import UmengReactNative.UmengReactPackage;
 import cn.jpush.reactnativejpush.JPushPackage;
 
 public class MainApplication extends Application implements ReactApplication {
@@ -33,7 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNDeviceInfo(),
             new ReactMaterialKitPackage(),
               new ImagePickerPackage(),
-              new JPushPackage(false,false)
+              new JPushPackage(false,false),
+              new UmengReactPackage()
       );
     }
   };

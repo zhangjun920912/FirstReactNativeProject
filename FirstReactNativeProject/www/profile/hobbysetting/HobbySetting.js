@@ -37,6 +37,10 @@ export default class HobbySetting extends Component
         };
     }
 
+    componentWillMount() {
+        window.UMNative.onEvent("OpenUserHobbyPage");
+    }
+
     //回调设置revenue的值
     resetRevenue(revenue)
     {

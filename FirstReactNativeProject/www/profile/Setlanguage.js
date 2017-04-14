@@ -76,6 +76,7 @@ export default class Setlanguage extends BaseComponent
     //修改语言
     changeLanguageTo(isEnglish)
     {
+        window.UMNative.onEvent("ChangeLanguage");
         if(isEnglish)
         {
             window.i18n.changeToEnglish().then(()=>{});
