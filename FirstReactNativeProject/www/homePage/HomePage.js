@@ -30,6 +30,7 @@ export default class HomePage extends Component
 
     //获取数据
     componentWillMount() {
+        window.UMNative.onEvent("HomeDeallist");
         fetch("http://staging.dealglobe.com/api/v4/deals/search",{method:'GET',headers:{"Accept":"application/json"}})
         .then((response)=>{return response.json()})
         .then((responseData)=>{
@@ -90,6 +91,7 @@ export default class HomePage extends Component
     {
         return(
             <TouchableWithoutFeedback onPress={()=>{
+                window.UMNative.onEvent("EnterDeallist");
                 this.props.navigator.push({name:"dealdetail",deal:deal});
             }}>
             <View>

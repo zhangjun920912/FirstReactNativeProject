@@ -23,6 +23,10 @@ export default class Recommend extends Component
         };
     }
 
+    componentWillMount() {
+        window.UMNative.onEvent("OpenRecommendpage");
+    }
+
     render()
     {
         var image=null;

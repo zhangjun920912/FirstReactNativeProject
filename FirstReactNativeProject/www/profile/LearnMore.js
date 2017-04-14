@@ -20,6 +20,10 @@ export default class LearnMore extends Component
         super(props);
     }
 
+    componentWillMount() {
+        window.UMNative.onEvent("LearnMore");
+    }
+
     render()
     {
         return(

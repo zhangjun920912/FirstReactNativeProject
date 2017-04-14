@@ -27,6 +27,10 @@ export default class Newspage extends Component
     {
         console.log("======news======LanguageHasChanged============")
     }
+
+    componentWillMount() {
+        window.UMNative.onEvent("OpenNewspage");
+    }
     //监听语言发生变化
     componentDidMount() {
         window.EventBus.on('LanguageHasChanged',()=>{this.getName()});

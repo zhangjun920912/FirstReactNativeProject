@@ -8,7 +8,8 @@ import {
     Image,
     TouchableOpacity,
     Navigator,
-    Alert
+    Alert,
+    NativeModules
 } from 'react-native'
 import HomePage from '../homePage/HomePage.js'
 import ProfilePage from '../profile/Profilepage.js'
@@ -31,6 +32,7 @@ var BackboneEvents=require('backbone-events-standalone');
 //创建全局的时间变量
 window.EventBus=BackboneEvents.mixin({});
 window.i18n=new I18n();
+window.UMNative=require('react-native').NativeModules.UmengNativeModule;
 var initialRouters=[{name:"tab",index:0}];
 
 
@@ -53,6 +55,7 @@ export default class Main extends Component
     }
 
     componentWillMount() {
+        window.UMNative.onEvent("LaunchApp");
     }
 
 
@@ -73,6 +76,7 @@ export default class Main extends Component
             var newMessage=JSON.parse(msg.extras);
             Alert.alert("您有新的消息,是否查看:",newMessage.title,[{text:"确定",onPress:()=>{
                 this.navigator.push({name:"NewsDetail",path:newMessage.content});
+                window.UMNative.onEvent("OpenJpushNews");
             }},{text:"取消",onPress:()=>{}}]);
         })
     }
