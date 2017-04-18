@@ -97,7 +97,7 @@ export default class HomePage extends Component
             <View>
                 <View style={{backgroundColor:'#E3E3E3',height:1}}/>
                 <View style={{flexDirection:'row',marginTop:10,marginBottom:10,alignItems:'center'}}>
-                    <Image source={{uri:deal.sector_image_path}} style={{height:screenWeight/8,width:screenWeight/8}}/>
+                    <Image source={{uri:deal.sector_image_path}} style={{height:screenWeight/4,width:screenWeight/4}}/>
                     <View style={{marginLeft:20}}>
                         <View style={{flexDirection:'row'}}>
                             <Text style={{fontSize:20,color:'#1A1A1A'}}>{deal.country_name}</Text>
