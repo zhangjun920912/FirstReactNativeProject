@@ -31,7 +31,7 @@ export default class DealDetail extends Component
 
     componentWillMount() {
         console.log("===========componentWillMount================"+JSON.stringify(this.props.deal));
-        UmengShare.setWeixin("wxde88d8de054a7a01", "9506c95c6c0ac9cb654e2e8e37b91586");
+        UmengShare.setWeixin("wxaea20c377ee3562a", "a9aaae10682296dabe0af0171ed7f1b2");
         UmengShare.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
         UmengShare.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad");
     }
@@ -42,9 +42,6 @@ export default class DealDetail extends Component
     render()
     {
         return(
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-            >
             <View style={{height:screenHeight}}>
                 <View style={{height:60,backgroundColor:'rgba(60,60,255,0.6)',alignItems:'center',flexDirection:'row',paddingRight:20}}>
                     <TouchableOpacity onPress={()=>{this.props.navigator.pop()}}>
@@ -58,11 +55,14 @@ export default class DealDetail extends Component
                     </View>
                     <TouchableOpacity onPress={()=>{
                         window.UMNative.onEvent("UmengShare");
-                        UmengShare.openShare(this.state.deal.display_name,this.state.deal.public_description,"http://www.imust.cn",{uri:"http://staging.dealglobe.com"+"/sellsides/"+this.state.deal.id});
+                        UmengShare.openShare(this.state.deal.display_name,this.state.deal.public_description,"http://www.imust.cn",{uri:this.state.deal.sector_image_path});
                     }}>
                         <Image source={require('./../images/Shares.png')} style={{height:35,width:35}}/>
                     </TouchableOpacity>
                 </View>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                >
                 <View style={{justifyContent:'center',alignItems:'center'}}>
                     <Image source={{uri:this.state.deal.sector_image_path}} style={{width:screenWeight/3,height:screenWeight/3,marginTop:20}}/>
                     <Text style={{marginTop:80,fontSize:22,color:'#1A1A1A'}}>项目名称:{this.state.deal.display_name}</Text>
@@ -73,8 +73,8 @@ export default class DealDetail extends Component
                     <Text style={{marginTop:20,fontSize:22,color:'#1A1A1A'}}>项目EBITDA:{this.state.deal.ebitda}</Text>
                     <Text style={{marginTop:20,fontSize:22,color:'#1A1A1A'}}>项目净收入:{this.state.deal.net_profit}</Text>
                 </View>
+                </ScrollView>
             </View>
-            </ScrollView>
         );
     }
 
