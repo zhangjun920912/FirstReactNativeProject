@@ -31,8 +31,9 @@ export default class HomePage extends Component
     //获取数据
     componentWillMount() {
         window.UMNative.onEvent("HomeDeallist");
-        fetch("http://staging.dealglobe.com/api/v4/deals/search",{method:'GET',headers:{"Accept":"application/json"}})
-        .then((response)=>{return response.json()})
+        window.netWork.fetchData("api/v4/deals/search",null,'GET',{"Accept":"application/json"})
+        .then((response)=>{
+            return response.json()})
         .then((responseData)=>{
             dealDescription=responseData.meta;
             dealList=responseData.deals;

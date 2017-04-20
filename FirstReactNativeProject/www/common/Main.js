@@ -26,11 +26,13 @@ import Login from './../profile/login/Login.js'
 import NewsDetail from './../common/NewsDetail.js'
 
 import JPushModule from 'jpush-react-native'
+import {Network} from './../common/Network.js'
 
 //导入事件变量
 var BackboneEvents=require('backbone-events-standalone');
 //创建全局的时间变量
 window.EventBus=BackboneEvents.mixin({});
+window.netWork=new Network();
 window.i18n=new I18n();
 window.UMNative=require('react-native').NativeModules.UmengNativeModule;
 var initialRouters=[{name:"tab",index:0}];
