@@ -8,5 +8,5 @@ export const CHANGE_TOENGLISH  ="CHINESE/TOENGLISH";
 
 //recommand界面切换图片常量
 export const CHANGETOYAODI  =  "CHANGETOYAODI";
-export const CHANGETOIMAGE  =  "CHANGETOIMAGE";
+export const CHANGETOWENZHANG  =  "CHANGETOWENZHANG";
 
