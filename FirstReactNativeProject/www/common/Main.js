@@ -38,6 +38,7 @@ window.UMNative=require('react-native').NativeModules.UmengNativeModule;
 var initialRouters=[{name:"tab",index:0}];
 
 
+
 export default class Main extends Component
 {
     constructor(props)

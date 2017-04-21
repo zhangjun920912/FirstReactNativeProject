@@ -32,7 +32,7 @@ export default class Recommend extends Component
         var image=null;
         if(this.state.comeTrue)
         {
-            image=(<Image source={require('./../images/feifei.jpg')} style={{width:140,height:140,borderRadius:70}}/>);
+            image=(<Image source={require('./../images/wenzhang.jpg')} style={{width:140,height:140,borderRadius:70}}/>);
         }else{
             image=(<Image source={require('./../images/yaodi.jpg')} style={{width:140,height:140,borderRadius:70}}/>);
         }
