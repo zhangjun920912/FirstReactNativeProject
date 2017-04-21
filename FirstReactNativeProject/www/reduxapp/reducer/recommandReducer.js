@@ -1,8 +1,8 @@
 /**
  * Created by zhangjunimust on 17/4/21.
  */
-import {CHANGETOYAODI,CHANGETOIMAGE} from './../constants.js'
-const initialState = {imageName:""};
+import {CHANGETOYAODI,CHANGETOWENZHANG} from './../constants.js'
+const initialState = {imageName:"文章",trueLove:true};
 
 export default function languageReducer(state=initialState,action)
 {
@@ -10,12 +10,13 @@ export default function languageReducer(state=initialState,action)
     {
         case CHANGETOYAODI:
         {
-            state.imageName="姚笛";
+            return({...this.state,imageName:'姚笛',trueLove:false});
         }
-        case CHANGETOIMAGE:
+        case CHANGETOWENZHANG:
         {
-            state.imageName="文章";
+            return({...this.state,imageName:'文章',trueLove:true});
         }
     }
+    console.log("================change image by reducer==================="+JSON.stringify(state));
     return state;
 }

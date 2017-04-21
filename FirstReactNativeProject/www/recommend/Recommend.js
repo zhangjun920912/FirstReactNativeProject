@@ -10,16 +10,17 @@ import {
     Dimensions,
     WebView
 } from 'react-native'
+import {connect} from 'react-redux'
+import * as constants from './../reduxapp/constants.js'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
 
-export default class Recommend extends Component
+class Recommend extends Component
 {
     constructor(props)
     {
         super(props);
         this.state={
-            comeTrue:true
         };
     }
 
@@ -30,7 +31,7 @@ export default class Recommend extends Component
     render()
     {
         var image=null;
-        if(this.state.comeTrue)
+        if(this.props.trueLove)
         {
             image=(<Image source={require('./../images/wenzhang.jpg')} style={{width:140,height:140,borderRadius:70}}/>);
         }else{
@@ -46,11 +47,34 @@ export default class Recommend extends Component
                 <View style={{marginTop:20,marginLeft:20,marginRight:20,alignItems:'center'}}>
                     {image}
                 </View>
-                <TouchableOpacity onPress={()=>{this.setState({...this.state,comeTrue:!this.state.comeTrue});}}>
+                <TouchableOpacity onPress={()=>{
+                    this.props.changeImage2();
+                }}>
                 <View style={{backgroundColor:'#00A600',height:40,marginLeft:10,marginRight:10,marginTop:20,alignItems:'center',justifyContent:'center'}}>
-                    <Text style={{color:'#ffffff'}}>点击修改</Text>
+                    <Text style={{color:'#ffffff'}}>点击修改-->文章</Text>
+                </View>
+                </TouchableOpacity>
+                <View style={{alignItems:'center',justifyContent:'center',marginTop:20}}>
+                    <Text style={{fontSize:26,color:'#ff0000'}}>{this.props.imageName}</Text>
+                </View>
+                <TouchableOpacity onPress={()=>{
+                    this.props.changeImage();
+                }}>
+                <View style={{backgroundColor:'#A600A6',height:40,marginLeft:10,marginRight:10,marginTop:20,alignItems:'center',justifyContent:'center'}}>
+                    <Text style={{color:'#ffffff'}}>点击修改-->姚笛</Text>
                 </View>
                 </TouchableOpacity>
             </View>);
     }
 }
+
+export default connect(
+    (state)=>({
+       imageName:state.recommand.imageName,
+       trueLove:state.recommand.trueLove
+    }),
+    (dispatch)=>({
+        changeImage:()=>dispatch({type:constants.CHANGETOYAODI}),
+        changeImage2:()=>dispatch({type:constants.CHANGETOWENZHANG})
+    })
+)(Recommend)

@@ -12,10 +12,12 @@ import {
     AsyncStorage
 } from 'react-native'
 import BaseComponent from './../common/BaseComponent.js'
+import {connect} from 'react-redux'
+import * as constants from './../reduxapp/constants.js'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
 
-export default class Setlanguage extends BaseComponent
+class Setlanguage extends BaseComponent
 {
     constructor(props)
     {
@@ -79,9 +81,9 @@ export default class Setlanguage extends BaseComponent
         window.UMNative.onEvent("ChangeLanguage");
         if(isEnglish)
         {
-            window.i18n.changeToEnglish().then(()=>{});
+            window.i18n.changeToEnglish().then(()=>{this.props.languageChange()});
         }else{
-            window.i18n.changeToChinese().then(()=>{});
+            window.i18n.changeToChinese().then(()=>{this.props.languageChange()});
         }
     }
 
@@ -134,4 +136,13 @@ export default class Setlanguage extends BaseComponent
             </View>);
     }
 }
+
+export default connect(
+    (state)=>({
+
+    }),
+    (dispatch)=>({
+        languageChange:()=>dispatch({type:constants.CHANGE_TOCHINESE})
+    })
+)(Setlanguage)
 
