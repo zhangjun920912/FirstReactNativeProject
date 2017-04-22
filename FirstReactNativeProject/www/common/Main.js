@@ -44,6 +44,7 @@ export default class Main extends Component
     constructor(props)
     {
         super(props);
+        console.log("===========all redux state===================="+JSON.stringify(this.props.store.getState()));
         this.navigator=null;
         this.state={
             selectedTab:"home"

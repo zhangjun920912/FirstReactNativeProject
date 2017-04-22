@@ -47,23 +47,29 @@ class Recommend extends Component
                 <View style={{marginTop:20,marginLeft:20,marginRight:20,alignItems:'center'}}>
                     {image}
                 </View>
-                <TouchableOpacity onPress={()=>{
+                <View style={{flexDirection:'row'}}>
+                <TouchableOpacity
+                    style={{flex:1}}
+                    onPress={()=>{
                     this.props.changeImage2();
                 }}>
                 <View style={{backgroundColor:'#00A600',height:40,marginLeft:10,marginRight:10,marginTop:20,alignItems:'center',justifyContent:'center'}}>
                     <Text style={{color:'#ffffff'}}>点击修改-->文章</Text>
                 </View>
                 </TouchableOpacity>
+                <TouchableOpacity
+                    style={{flex:1}}
+                    onPress={()=>{
+                    this.props.changeImage();
+                }}>
+                    <View style={{backgroundColor:'#A600A6',height:40,marginLeft:10,marginRight:10,marginTop:20,alignItems:'center',justifyContent:'center'}}>
+                        <Text style={{color:'#ffffff'}}>点击修改-->姚笛</Text>
+                    </View>
+                </TouchableOpacity>
+                </View>
                 <View style={{alignItems:'center',justifyContent:'center',marginTop:20}}>
                     <Text style={{fontSize:26,color:'#ff0000'}}>{this.props.imageName}</Text>
                 </View>
-                <TouchableOpacity onPress={()=>{
-                    this.props.changeImage();
-                }}>
-                <View style={{backgroundColor:'#A600A6',height:40,marginLeft:10,marginRight:10,marginTop:20,alignItems:'center',justifyContent:'center'}}>
-                    <Text style={{color:'#ffffff'}}>点击修改-->姚笛</Text>
-                </View>
-                </TouchableOpacity>
             </View>);
     }
 }

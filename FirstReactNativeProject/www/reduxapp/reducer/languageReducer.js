@@ -6,7 +6,6 @@ const initialState = {en:null,zh:null};
 
 export default function languageReducer(state=initialState,action)
 {
-    console.log("=================change language by redux====================");
     switch(action.type)
     {
         case CHANGE_TOCHINESE:
