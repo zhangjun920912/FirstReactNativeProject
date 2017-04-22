@@ -10,6 +10,7 @@ import {
     ListView,
     TouchableWithoutFeedback,
     ActivityIndicator,
+    RefreshControl
 } from 'react-native'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
@@ -24,34 +25,39 @@ export default class HomePage extends Component
         this.state={
             project:false,
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
-            initProject:true
+            initProject:true,
+            refreshing:false
         };
     }
 
     //获取数据
     componentWillMount() {
         window.UMNative.onEvent("HomeDeallist");
+        this.getDealList()
+    }
+    //获取表单数据
+    getDealList()
+    {
+        this.setState({...this.state,refreshing:true});
         window.netWork.fetchData("api/v4/deals/search",null,'GET',{"Accept":"application/json"})
-        .then((response)=>{
-            return response.json()})
-        .then((responseData)=>{
-            dealDescription=responseData.meta;
-            dealList=responseData.deals;
-            this.setState({dataSource:this.state.dataSource.cloneWithRows(dealList),initProject:false});
-        }).catch((error)=>{
+            .then((response)=>{
+                return response.json()})
+            .then((responseData)=>{
+                this.setState({...this.state,refreshing:false});
+                dealDescription=responseData.meta;
+                dealList=responseData.deals;
+                this.setState({dataSource:this.state.dataSource.cloneWithRows(dealList),initProject:false});
+            }).catch((error)=>{
             if(error)
             {
                 console.log("============================"+error);
             }
         });
     }
-    getName()
-    {
-        console.log("======home======LanguageHasChanged=============")
-    }
+
     //监听语言发生变化
     componentDidMount() {
-        window.EventBus.on('LanguageHasChanged',()=>{this.getName()});
+        window.EventBus.on('LanguageHasChanged',()=>{console.log("======home======LanguageHasChanged=============")});
     }
     //获取项目的财务收入状况
     getRevenueInfo(dealDetail)
@@ -137,6 +143,14 @@ export default class HomePage extends Component
                         dataSource={this.state.dataSource}
                         showsVerticalScrollIndicator={false}
                         style={{marginBottom:10}}
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={()=>{
+                                    this.getDealList();
+                                }}
+                            />
+                        }
                     />
                 </View>
             );
