@@ -70,7 +70,73 @@ class Recommend extends Component
                 <View style={{alignItems:'center',justifyContent:'center',marginTop:20}}>
                     <Text style={{fontSize:26,color:'#ff0000'}}>{this.props.imageName}</Text>
                 </View>
+                <View style={{marginTop:60,alignItems:'center'}}>
+                    <Text style={{fontSize:22,color:'#A946AE',marginBottom:20}}>Redux Demo1</Text>
+                    <Counter1></Counter1>
+                    <Counter1></Counter1>
+                    <Counter2></Counter2>
+                </View>
             </View>);
+    }
+}
+
+class Counter1 extends Component
+{
+    constructor(props)
+    {
+        super(props);
+        this.state={
+            counter:0
+        };
+    }
+
+    render()
+    {
+        return(
+            <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
+                <Text style={{color:'#23EDF5',fontSize:20}}>计数器:{this.state.counter}</Text>
+                <TouchableOpacity onPress={()=>{this.addCounter()}}>
+                    <View style={{width:80,height:40,marginLeft:20,backgroundColor:'#F5A623',alignItems:'center',justifyContent:'center'}}>
+                        <Text style={{color:'#ffffff'}}>点击我</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    addCounter()
+    {
+        this.setState({...this.state,counter:this.state.counter+1});
+    }
+}
+
+class Counter2 extends Component
+{
+    constructor(props)
+    {
+        super(props);
+        this.state={
+            counter:0
+        };
+    }
+
+    render()
+    {
+        return(
+            <View style={{flexDirection:'row',alignItems:'center',marginTop:10}}>
+                <Text style={{color:'#F55823',fontSize:20}}>计数器:{this.state.counter}</Text>
+                <TouchableOpacity onPress={this.addCounter.bind(this)}>
+                    <View style={{width:80,height:40,marginLeft:20,backgroundColor:'#4485F2',alignItems:'center',justifyContent:'center'}}>
+                        <Text style={{color:'#ffffff'}}>点击我</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    addCounter()
+    {
+        this.setState({...this.state,counter:this.state.counter+1});
     }
 }
 
