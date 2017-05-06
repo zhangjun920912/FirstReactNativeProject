@@ -22,7 +22,18 @@ export class Network extends Component
         }else{
             fullPath=this.host+path;
         }
+        var reqPrarms=[];
+        for(var item in params)
+        {
+            reqPrarms.push(item + "=" + params[item]);
+        }
+        reqPrarms=reqPrarms.join("&");
 
+        if(0!==reqPrarms.length)
+        {
+            fullPath=fullPath+'?'+reqPrarms;
+        }
+        console.log("=============We get path:"+(fullPath));
         return fetch(fullPath,{method:method,headers:header});
 
     }
