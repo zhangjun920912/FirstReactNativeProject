@@ -17,6 +17,8 @@ export default function languageReducer(state=initialState,action)
         {
             return({...this.state,imageName:'文章',trueLove:true});
         }
+        default:
+            return state;
     }
     return state;
 }

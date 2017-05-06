@@ -25,7 +25,6 @@ export default class HomePage extends Component
     {
         super(props);
         this.state={
-            project:false,
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
             initProject:true,//初始化加载界面
             refreshing:false,//是否正在刷新界面
