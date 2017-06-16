@@ -10,7 +10,7 @@ export class Network extends Component
     constructor(props)
     {
         super(props);
-        this.host="http://pre.dealglobe.com/";
+        this.host="https://pre.dealglobe.com/";
     }
 
     fetchData(path,params={},method="GET",header={})
