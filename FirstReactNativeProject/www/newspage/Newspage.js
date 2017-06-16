@@ -58,7 +58,7 @@ export default class Newspage extends Component
                 </View>
                 <View style={{flex:1}}>
                     <WebView
-                        source={{uri:"http://en.dealglobe.com/dealglobe-insight/", headers:{"client-type":"android","Content-Type":"text/html;"}} }
+                        source={{uri:"http://cn.dealglobe.com/category/ma-news-zh-hans/", headers:{"client-type":"android","Content-Type":"text/html;"}} }
                         startInLoadingState={true}
                     >
                         {animation}
