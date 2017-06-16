@@ -3,6 +3,10 @@ package com.firstreactnativeproject;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.yolinsoft.umengshare.UmengSharePackage;
+import com.imagepicker.ImagePickerPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -10,6 +14,9 @@ import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
+
+import UmengReactNative.UmengReactPackage;
+import cn.jpush.reactnativejpush.JPushPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -22,7 +29,13 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+            new UmengSharePackage(),
+            new RNDeviceInfo(),
+            new ReactMaterialKitPackage(),
+              new ImagePickerPackage(),
+              new JPushPackage(false,false),
+              new UmengReactPackage()
       );
     }
   };

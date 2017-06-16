@@ -20,12 +20,16 @@ export default class Newspage extends Component
     {
         super(props);
         this.state={
-            initPage:false,
+            initPage:true,
         };
     }
     getName()
     {
-        console.log("======news======LanguageHasChanged=============")
+        console.log("======news======LanguageHasChanged============")
+    }
+
+    componentWillMount() {
+        window.UMNative.onEvent("OpenNewspage");
     }
     //监听语言发生变化
     componentDidMount() {
@@ -49,20 +53,13 @@ export default class Newspage extends Component
         }
         return(
             <View style={{height:screenHeight}}>
-                <View style={{height:60,backgroundColor:'rgba(255,60,60,0.6)',justifyContent:'center',alignItems:'center'}}>
+                <View style={{height:60,backgroundColor:'rgba(0,199,255,0.8)',justifyContent:'center',alignItems:'center'}}>
                     <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>新闻咨询</Text>
                 </View>
                 <View style={{flex:1}}>
                     <WebView
-                        source={{uri:"http://en.dealglobe.com/dealglobe-insight/", headers:{"client-type":"android","Content-Type":"text/html;"}} }
-                        onLoadStart={()=>{
-                            this.setState({initPage:true})
-                            console.log("========load start===========");
-                        }}
-                        onLoadEnd={()=>{
-                            console.log("========load end===========");
-                            this.setState({initPage:false});
-                        }}
+                        source={{uri:"http://cn.dealglobe.com/category/ma-news-zh-hans/", headers:{"client-type":"android","Content-Type":"text/html;"}} }
+                        startInLoadingState={true}
                     >
                         {animation}
                     </WebView>

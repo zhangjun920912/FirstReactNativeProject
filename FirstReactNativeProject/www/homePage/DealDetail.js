@@ -11,6 +11,7 @@ import {
     TouchableOpacity,
     ScrollView,
 } from 'react-native'
+var UmengShare=require('react-native-umeng-share');
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
 
@@ -30,6 +31,9 @@ export default class DealDetail extends Component
 
     componentWillMount() {
         console.log("===========componentWillMount================"+JSON.stringify(this.props.deal));
+        UmengShare.setWeixin("wxaea20c377ee3562a", "a9aaae10682296dabe0af0171ed7f1b2");
+        UmengShare.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+        UmengShare.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad");
     }
 
     componentDidMount() {
@@ -38,11 +42,8 @@ export default class DealDetail extends Component
     render()
     {
         return(
-            <ScrollView
-                showsVerticalScrollIndicator={false}
-            >
             <View style={{height:screenHeight}}>
-                <View style={{height:60,backgroundColor:'rgba(60,60,255,0.6)',alignItems:'center',flexDirection:'row',paddingRight:screenWeight/12}}>
+                <View style={{height:60,backgroundColor:'rgba(60,60,255,0.6)',alignItems:'center',flexDirection:'row',paddingRight:20}}>
                     <TouchableOpacity onPress={()=>{this.props.navigator.pop()}}>
                       <View style={{flexDirection:'row'}}>
                         <Image source={require('./../images/whitecolorbackpre.png')} style={{marginLeft:20}}/>
@@ -52,9 +53,18 @@ export default class DealDetail extends Component
                     <View style={{flex:1}}>
                       <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>项目详情</Text>
                     </View>
+                    <TouchableOpacity onPress={()=>{
+                        window.UMNative.onEvent("UmengShare");
+                        UmengShare.openShare(this.state.deal.display_name,this.state.deal.public_description,"http://www.imust.cn",{uri:this.state.deal.sector_image_path});
+                    }}>
+                        <Image source={require('./../images/Shares.png')} style={{height:35,width:35}}/>
+                    </TouchableOpacity>
                 </View>
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                >
                 <View style={{justifyContent:'center',alignItems:'center'}}>
-                    <Image source={{uri:this.state.deal.sector_image_path}} style={{width:screenWeight/3,height:screenWeight/3}}/>
+                    <Image source={{uri:this.state.deal.sector_image_path}} style={{width:screenWeight/3,height:screenWeight/3,marginTop:20}}/>
                     <Text style={{marginTop:80,fontSize:22,color:'#1A1A1A'}}>项目名称:{this.state.deal.display_name}</Text>
                     <Text style={{marginTop:20,fontSize:22,color:'#1A1A1A'}}>项目所属国家:{this.state.deal.country_name}</Text>
                     <Text style={{marginTop:20,fontSize:22,color:'#1A1A1A'}}>项目ID:{this.state.deal.id}</Text>
@@ -63,8 +73,8 @@ export default class DealDetail extends Component
                     <Text style={{marginTop:20,fontSize:22,color:'#1A1A1A'}}>项目EBITDA:{this.state.deal.ebitda}</Text>
                     <Text style={{marginTop:20,fontSize:22,color:'#1A1A1A'}}>项目净收入:{this.state.deal.net_profit}</Text>
                 </View>
+                </ScrollView>
             </View>
-            </ScrollView>
         );
     }
 

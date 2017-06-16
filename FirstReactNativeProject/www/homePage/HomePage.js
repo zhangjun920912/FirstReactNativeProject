@@ -10,6 +10,9 @@ import {
     ListView,
     TouchableWithoutFeedback,
     ActivityIndicator,
+    TouchableOpacity,
+    RefreshControl,
+    ToastAndroid,
 } from 'react-native'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
@@ -22,34 +25,41 @@ export default class HomePage extends Component
     {
         super(props);
         this.state={
-            project:false,
             dataSource:new ListView.DataSource({rowHasChanged:(r1,r2)=>r1!=r2}),
-            initProject:true
+            initProject:true,//初始化加载界面
+            refreshing:false,//是否正在刷新界面
+            currentpage:1 //当前页面
         };
     }
 
     //获取数据
     componentWillMount() {
-        fetch("http://staging.dealglobe.com/api/v4/deals/search",{method:'GET',headers:{"Accept":"application/json"}})
-        .then((response)=>{return response.json()})
-        .then((responseData)=>{
-            dealDescription=responseData.meta;
-            dealList=responseData.deals;
-            this.setState({dataSource:this.state.dataSource.cloneWithRows(dealList),initProject:false});
-        }).catch((error)=>{
+        window.UMNative.onEvent("HomeDeallist");
+        this.getDealList()
+    }
+    //获取表单数据
+    getDealList()
+    {
+        this.setState({...this.state,refreshing:true});
+        window.netWork.fetchData("api/v4/deals/search",null,'GET',{"Accept":"application/json"})
+            .then((response)=>{
+                return response.json()})
+            .then((responseData)=>{
+                this.setState({...this.state,refreshing:false});
+                dealDescription=responseData.meta;
+                dealList=responseData.deals;
+                this.setState({dataSource:this.state.dataSource.cloneWithRows(dealList),initProject:false});
+            }).catch((error)=>{
             if(error)
             {
                 console.log("============================"+error);
             }
         });
     }
-    getName()
-    {
-        console.log("======home======LanguageHasChanged=============")
-    }
+
     //监听语言发生变化
     componentDidMount() {
-        window.EventBus.on('LanguageHasChanged',()=>{this.getName()});
+        window.EventBus.on('LanguageHasChanged',()=>{console.log("======home======LanguageHasChanged=============")});
     }
     //获取项目的财务收入状况
     getRevenueInfo(dealDetail)
@@ -90,12 +100,13 @@ export default class HomePage extends Component
     {
         return(
             <TouchableWithoutFeedback onPress={()=>{
+                window.UMNative.onEvent("EnterDeallist");
                 this.props.navigator.push({name:"dealdetail",deal:deal});
             }}>
             <View>
                 <View style={{backgroundColor:'#E3E3E3',height:1}}/>
                 <View style={{flexDirection:'row',marginTop:10,marginBottom:10,alignItems:'center'}}>
-                    <Image source={{uri:deal.sector_image_path}} style={{height:screenWeight/8,width:screenWeight/8}}/>
+                    <Image source={{uri:deal.sector_image_path}} style={{height:screenWeight/4,width:screenWeight/4}}/>
                     <View style={{marginLeft:20}}>
                         <View style={{flexDirection:'row'}}>
                             <Text style={{fontSize:20,color:'#1A1A1A'}}>{deal.country_name}</Text>
@@ -110,7 +121,56 @@ export default class HomePage extends Component
             </View>
             </TouchableWithoutFeedback>)
     }
-
+    //获取上一页的数据
+    getPrePage()
+    {
+        if(dealDescription.is_first_page)
+        {
+            ToastAndroid.show("当前为首页",ToastAndroid.SHORT);
+        }else{
+            this.setState({...this.state,refreshing:true,currentpage:this.state.currentpage-1},()=>{
+                window.netWork.fetchData("api/v4/deals/search",{page:this.state.currentpage},'GET',{"Accept":"application/json"})
+                    .then((response)=>{
+                        return response.json()})
+                    .then((responseData)=>{
+                        this.setState({...this.state,refreshing:false});
+                        dealDescription=responseData.meta;
+                        dealList=responseData.deals;
+                        this.setState({dataSource:this.state.dataSource.cloneWithRows(dealList),initProject:false});
+                    }).catch((error)=>{
+                    if(error)
+                    {
+                        console.log("============================"+error);
+                    }
+                });
+            });
+        }
+    }
+    //获取下一页的数据
+    getNextPage()
+    {
+        if(dealDescription.is_last_page)
+        {
+            ToastAndroid.show("当前为尾页",ToastAndroid.SHORT);
+        }else{
+            this.setState({...this.state,refreshing:true,currentpage:this.state.currentpage+1},()=>{
+                window.netWork.fetchData("api/v4/deals/search",{page:this.state.currentpage},'GET',{"Accept":"application/json"})
+                    .then((response)=>{
+                        return response.json()})
+                    .then((responseData)=>{
+                        this.setState({...this.state,refreshing:false});
+                        dealDescription=responseData.meta;
+                        dealList=responseData.deals;
+                        this.setState({dataSource:this.state.dataSource.cloneWithRows(dealList),initProject:false});
+                    }).catch((error)=>{
+                    if(error)
+                    {
+                        console.log("============================"+error);
+                    }
+                });
+            });
+        }
+    }
     //渲染函数
     render()
     {
@@ -121,7 +181,7 @@ export default class HomePage extends Component
                 <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
                     <ActivityIndicator
                         size={"large"}
-                        color={'#00ff00'}
+                        color={'rgba(60,60,255,0.6)'}
                         animating={true}
                     />
                     <Text style={{marginTop:10,fontSize:18}}>正在加载...</Text>
@@ -134,14 +194,32 @@ export default class HomePage extends Component
                         dataSource={this.state.dataSource}
                         showsVerticalScrollIndicator={false}
                         style={{marginBottom:10}}
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={()=>{
+                                    this.getDealList();
+                                }}
+                            />
+                        }
                     />
                 </View>
             );
         }
         return(
             <View style={{height:screenHeight}}>
-                <View style={{height:60,backgroundColor:'rgba(60,60,255,0.6)',justifyContent:'center',alignItems:'center'}}>
+                <View style={{height:60,backgroundColor:'rgba(60,60,255,0.6)',justifyContent:'space-between',alignItems:'center',flexDirection:'row',paddingLeft:20,paddingRight:20}}>
+                    <TouchableOpacity onPress={()=>{
+                        this.getPrePage();
+                    }}>
+                        <View style={{height:40,width:80,backgroundColor:'#A946AE',justifyContent:'center',alignItems:'center',borderRadius:10}}><Text style={{color:'#ffffff',fontSize:16}}>上一页</Text></View>
+                    </TouchableOpacity>
                     <Text style={{fontSize:22,color:'#ffffff',alignSelf:'center'}}>项目列表</Text>
+                    <TouchableOpacity onPress={()=>{
+                        this.getNextPage();
+                    }}>
+                        <View style={{height:40,width:80,backgroundColor:'#A946AE',justifyContent:'center',alignItems:'center',borderRadius:10}}><Text style={{color:'#ffffff',fontSize:16}}>下一页</Text></View>
+                    </TouchableOpacity>
                 </View>
                 {content}
             </View>);

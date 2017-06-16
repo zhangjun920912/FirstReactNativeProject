@@ -20,6 +20,10 @@ export default class LearnMore extends Component
         super(props);
     }
 
+    componentWillMount() {
+        window.UMNative.onEvent("LearnMore");
+    }
+
     render()
     {
         return(
@@ -38,6 +42,7 @@ export default class LearnMore extends Component
                 <WebView
                     source={{uri:"http://www.dealglobe.com",headers:{"client-type":"android","Content-Type":"text/html;"}}}
                     style={{width:screenWeight,height:screenWeight-60}}
+                    startInLoadingState={true}
                 />
             </View>);
     }

@@ -1,24 +1,38 @@
 {
-	"name": "FirstReactNativeProject",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start",
-		"test": "jest"
-	},
-	"dependencies": {
-		"react": "15.4.2",
-		"react-native": "0.42.0",
-		"react-native-tab-navigator":"^0.3.3",
-		"backbone-events-standalone":"^0.2.7"
-	},
-	"devDependencies": {
-		"babel-jest": "19.0.0",
-		"babel-preset-react-native": "1.9.1",
-		"jest": "19.0.2",
-		"react-test-renderer": "15.4.2"
-	},
-	"jest": {
-		"preset": "react-native"
-	}
+  "name": "FirstReactNativeProject",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "configureJPush": "node node_modules/jpush-react-native/JPushConfiguration.js",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "backbone-events-standalone": "^0.2.7",
+    "jcore-react-native": "^1.0.0",
+    "jpush-react-native": "^1.5.6",
+    "md5": "^2.2.1",
+    "react": "15.4.2",
+    "react-native": "0.42.0",
+    "react-native-country-picker-modal": "^0.2.7",
+    "react-native-device-info": "^0.10.2",
+    "react-native-image-picker": "^0.26.2",
+    "react-native-material-kit": "^0.4.1",
+    "react-native-tab-navigator": "^0.3.3",
+    "react-native-umeng-share": "^1.0.0",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "redux-devtools-extension": "^2.13.0",
+    "redux-logger": "^3.0.1",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-jest": "19.0.0",
+    "babel-preset-react-native": "1.9.1",
+    "jest": "19.0.2",
+    "react-test-renderer": "15.4.2"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
 }
