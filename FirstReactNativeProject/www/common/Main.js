@@ -27,6 +27,7 @@ import NewsDetail from './../common/NewsDetail.js'
 
 import JPushModule from 'jpush-react-native'
 import {Network} from './../common/Network.js'
+import ProjectFlashHomePage from './../homePage/ProjectFlashHomePage.js'
 
 //导入事件变量
 var BackboneEvents=require('backbone-events-standalone');
@@ -113,7 +114,7 @@ export default class Main extends Component
                                     renderSelectedIcon={()=><Image source={require('./../images/Deals_F@2x.png')}/>}
                                     onPress={()=>this.setState({selectedTab:'home'})}
                                 >
-                                    <HomePage navigator={navigator}></HomePage>
+                                    <ProjectFlashHomePage navigator={navigator}></ProjectFlashHomePage>
                                 </TabNavigator.Item>
                                 <TabNavigator.Item
                                     selected={this.state.selectedTab==='flower'}
