@@ -8,10 +8,12 @@ import {
     Image,
     TouchableOpacity,
     Dimensions,
-    WebView
+    WebView,
+    StyleSheet,
 } from 'react-native'
 import {connect} from 'react-redux'
 import * as constants from './../reduxapp/constants.js'
+import Flag from 'react-native-flags'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
 
@@ -37,6 +39,7 @@ class Recommend extends Component
         }else{
             image=(<Image source={require('./../images/yaodi.jpg')} style={{width:140,height:140,borderRadius:70}}/>);
         }
+        var iso="CN";
         return(
             <View style={{height:screenHeight}}>
                 <View style={{height:60,backgroundColor:'rgba(245,166,35,0.8)',alignItems:'center',flexDirection:'row'}}>
@@ -76,9 +79,22 @@ class Recommend extends Component
                     <Counter1></Counter1>
                     <Counter2></Counter2>
                 </View>
+                <View style={recommendStyle.countryStyle}>
+                    <Flag
+                        code={iso}
+                        size={32}
+                    />
+                </View>
             </View>);
     }
 }
+
+const recommendStyle=StyleSheet.create({
+    countryStyle:{
+        alignItems:'center',
+        marginTop:12
+    }
+});
 
 class Counter1 extends Component
 {

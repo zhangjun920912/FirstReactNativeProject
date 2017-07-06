@@ -11,9 +11,11 @@ import {
   Text,
   View
 } from 'react-native';
+import Flag from 'react-native-flags'
 
 export default class FirstReactNativeProject extends Component {
   render() {
+    var iso="DE";
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -26,6 +28,12 @@ export default class FirstReactNativeProject extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+        <View style={{alignItems:'center'}}>
+          <Flag
+              code={iso}
+              style={{height:12,width:12}}
+          />
+        </View>
       </View>
     );
   }
