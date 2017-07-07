@@ -13,7 +13,6 @@ import {
 } from 'react-native'
 import {connect} from 'react-redux'
 import * as constants from './../reduxapp/constants.js'
-import Flag from 'react-native-flags'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
 
@@ -80,10 +79,6 @@ class Recommend extends Component
                     <Counter2></Counter2>
                 </View>
                 <View style={recommendStyle.countryStyle}>
-                    <Flag
-                        code={iso}
-                        size={32}
-                    />
                 </View>
             </View>);
     }

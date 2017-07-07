@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 var screenHeight=Dimensions.get('window').height;
 var screenWeight=Dimensions.get('window').width;
+import FontAwesome,{Icons} from 'react-native-fontawesome'
 
 export default class Flower extends Component
 {
@@ -35,6 +36,10 @@ export default class Flower extends Component
                 </View>
                 <View style={{marginTop:8,marginLeft:20,marginRight:20}}>
                     <Text style={{fontSize:22,alignSelf:'center'}}>项目排序</Text>
+                    <Text>
+                        照相机
+                        <FontAwesome>{Icons.CN}</FontAwesome>
+                    </Text>
                 </View>
             </View>);
     }
