@@ -20,9 +20,9 @@ export default class DealDetail extends Component
     constructor(props)
     {
         super(props);
-        this.state={
-            deal:this.props.deal
-        };
+        this.state= {
+            deal: this.props.navigation.state.params.deal,
+        }
     }
     getName()
     {
@@ -44,7 +44,7 @@ export default class DealDetail extends Component
         return(
             <View style={{height:screenHeight}}>
                 <View style={{height:60,backgroundColor:'rgba(60,60,255,0.6)',alignItems:'center',flexDirection:'row',paddingRight:20}}>
-                    <TouchableOpacity onPress={()=>{this.props.navigator.pop()}}>
+                    <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}}>
                       <View style={{flexDirection:'row'}}>
                         <Image source={require('./../images/whitecolorbackpre.png')} style={{marginLeft:20}}/>
                         <Text style={{color:'#ffffff',marginLeft:8}}>项目列表</Text>

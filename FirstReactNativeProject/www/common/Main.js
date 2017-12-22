@@ -23,6 +23,7 @@ import Recommend from './../recommend/Recommend.js'
 import Flower from './../flower/Flower.js'
 import I18n from './../common/I18n.js'
 import Login from './../profile/login/Login.js'
+import CountryPicker from './../profile/login/SelectCountryPicker/CountryPicker.js'
 import NewsDetail from './../common/NewsDetail.js'
 
 import JPushModule from 'jpush-react-native'
@@ -48,7 +49,7 @@ export default class Main extends Component
         console.log("===========all redux state===================="+JSON.stringify(window.store.getState()));
         this.navigator=null;
         this.state={
-            selectedTab:"home"
+            selectedTab:"profile"
         }
         JPushModule.initPush();
         JPushModule.getInfo((device)=>{
@@ -165,6 +166,10 @@ export default class Main extends Component
                     if(route.name=="NewsDetail")
                     {
                         return(<NewsDetail navigator={navigator} router={route} fullPath={route.path}/>);
+                    }
+                    if(route.name=="countryPicker")
+                    {
+                        return(<CountryPicker navigator={navigator} router={route}/>);
                     }
                 }}
             />

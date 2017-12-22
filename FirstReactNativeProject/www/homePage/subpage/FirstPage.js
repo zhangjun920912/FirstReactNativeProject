@@ -98,7 +98,7 @@ export default class FirstPage extends Component {
         return (
             <TouchableWithoutFeedback onPress={()=> {
                 window.UMNative.onEvent("EnterDeallist");
-                this.props.navigator.push({name: "dealdetail", deal: deal});
+                this.props.navigation.navigate("DealDetail", {deal: deal});
             }}>
                 <View>
                     <View style={{backgroundColor: '#E3E3E3', height: 1}}/>

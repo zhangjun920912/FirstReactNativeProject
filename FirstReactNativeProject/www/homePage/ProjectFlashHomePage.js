@@ -18,10 +18,20 @@ import SecondPage from './subpage/SecondPage.js'
 import ThirdPage from './subpage/ThirdPage.js'
 import FourthPage from './subpage/FourthPage.js'
 import FivePage from './subpage/FivePage.js'
+import DealDetail from './DealDetail.js'
 
 var fullScreenWidth = Dimensions.get('window').width;
+const FirstNavigator=StackNavigator({
+    DealDetail:{screen:DealDetail},
+    FirstPage:{screen:FirstPage}
+},{
+    initialRouteName:'FirstPage',
+    navigationOptions:{
+        headerStyle:{height:0}
+    }
+});
 const MainScreenNavigation = TabNavigator({
-    First: {screen: FirstPage, navigationOptions: {tabBarLabel: '我的订阅'}},
+    First: {screen: FirstNavigator, navigationOptions: {tabBarLabel: '我的订阅'}},
     Second: {screen: SecondPage, navigationOptions: {tabBarLabel: '共享项目'}},
     Third: {screen: ThirdPage, navigationOptions: {tabBarLabel: '投资情报'}},
     Fourth: {screen: FourthPage, navigationOptions: {tabBarLabel: '全部项目'}},

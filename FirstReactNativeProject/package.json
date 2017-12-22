@@ -14,7 +14,7 @@
     "md5": "^2.2.1",
     "react": "15.4.2",
     "react-native": "0.42.0",
-    "react-native-country-picker-modal": "^0.2.7",
+    "react-native-country-picker-modal": "^0.3.0",
     "react-native-device-info": "^0.10.2",
     "react-native-fontawesome": "^5.7.0",
     "react-native-image-picker": "^0.26.2",
