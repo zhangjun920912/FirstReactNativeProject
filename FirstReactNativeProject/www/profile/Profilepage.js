@@ -63,6 +63,13 @@ export default class Profilepage extends BaseComponent
                         </View>
                     </TouchableOpacity>
                     <View style={{height:1,backgroundColor:'#E3E3E3',marginLeft:20}}/>
+                    <TouchableOpacity onPress={()=>{this.props.navigator.push({name:'audioplayer'})}}>
+                        <View style={{height:60,flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                            <Text style={{color:'#1A1A1A', paddingLeft:20,fontSize:20,marginRight:40}}>音乐播放器</Text>
+                            <Image source={require('./../images/Next-item_@3x.png')} style={{height:40,width:40}}/>
+                        </View>
+                    </TouchableOpacity>
+                    <View style={{height:1,backgroundColor:'#E3E3E3',marginLeft:20}}/>
                 </View>
             </View>);
     }

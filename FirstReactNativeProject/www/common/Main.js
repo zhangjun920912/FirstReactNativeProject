@@ -17,6 +17,7 @@ import NewsPage from '../newspage/Newspage.js'
 import TabNavigator from 'react-native-tab-navigator'
 import DealDetail from './../homePage/DealDetail.js'
 import LearnMore from './../profile/LearnMore.js'
+import AudioPlayer from './../profile/AudioPlayer.js'
 import HobbySetting from './../profile/hobbysetting/HobbySetting.js'
 import SetLanguage from './../profile/Setlanguage.js'
 import Recommend from './../recommend/Recommend.js'
@@ -170,6 +171,10 @@ export default class Main extends Component
                     if(route.name=="countryPicker")
                     {
                         return(<CountryPicker navigator={navigator} router={route}/>);
+                    }
+                    if(route.name=="audioplayer")
+                    {
+                        return(<AudioPlayer navigator={navigator} router={route}/>);
                     }
                 }}
             />
